@@ -23,6 +23,8 @@ spring:
         - id : first-service
 #          uri : http://localhost:8081/
           uri: lb://MY-FIRST-SERVICE
+          # lb:// => euraka discovery에 MY-FIRST-SERVICE라는 key로 운영중인 서버목록을 가져와서
+          # 라운드 로빈 방식으로 한번씩 request를 분기쳐서 보내준다 (load balance)
           predicates:
             - Path=/first-service/**
             # http://localhost:8000/first-service/** 를 부르면
@@ -46,3 +48,26 @@ spring:
                 baseMessage: Hi, there
                 preLogger: true
                 postLogger: true
+
+# yml에서 -의 의미 : LIST를 의미한다.
+#
+#  - "string1"
+#  - "string2"
+#In JSON:
+#
+#  ["string1", "string2"]
+#They can also contain sets of key-value pairs:
+#
+#  - item1key1: "string1"
+#    item1key2: "string2"
+#  - item2key1: "string3"
+#    item2key2: "string4"
+#In JSON:
+#
+#  [{
+#    item1key1: "string1",
+#    item1key2: "string2"
+#  },{
+#    item2key1: "string3",
+#    item2key2: "string4"
+#  }]
