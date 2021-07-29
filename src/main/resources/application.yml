@@ -51,6 +51,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
 
         - id: catalog-service
           uri: lb://CATALOG-SERVICE
@@ -91,6 +92,9 @@ spring:
                 baseMessage: Hi, there
                 preLogger: true
                 postLogger: true
+
+token:
+  secret: user_token
 
 # yml에서 -의 의미 : LIST를 의미한다.
 #
